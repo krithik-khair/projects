@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krithik Khair | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Timer Section */
+        #timer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .timer-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timer {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            top: -25%;
+            left: -25%;
+        }
+
+        .timer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .timer-number {
+            font-size: 5rem;
+            font-weight: 200;
+            margin-bottom: 10px;
+        }
+
+        .timer-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(0deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Portfolio Section */
+        #portfolio-section {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .project-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255,255,255,0.4);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4dabf7;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .project-link i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover {
+            color: #74c0fc;
+        }
+
+        .project-link:hover i {
+            transform: translateX(5px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .timer {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .timer-number {
+                font-size: 4rem;
+            }
+            
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Timer Section -->
+        <section id="timer-section">
+            <h1 class="timer-title">Portfolio Loading</h1>
+            <div class="timer">
+                <svg class="progress-ring" width="300" height="300">
+                    <circle class="progress-ring-circle" stroke="#4dabf7" stroke-width="4" fill="transparent" r="140" cx="150" cy="150"/>
+                </svg>
+                <div class="timer-content">
+                    <div class="timer-number" id="countdown">10</div>
+                    <div class="timer-text">Seconds</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio-section">
+            <div class="header">
+                <h1 class="name">Krithik Khair</h1>
+                <p class="tagline">Crafting digital experiences with precision and passion. Explore my latest projects below.</p>
+            </div>
+
+            <div class="projects">
+                <!-- SoulLines -->
+                <div class="project-card fade-in">
+                    <a href="https://krithik-khair.github.io/soullines/" target="_blank">
+                        <div class="project-image">
+                            <img src="./Red and Black Modern Chat Logo_20251109_205246_0000.png" alt="SoulLines Project">
+                        </div>
+                    </a>
+                    <div class="project-content">
+                        <h3 class="project-title">SoulLines</h3>
+                        <p class="project-description">A modern conversational experience blending emotion, design, and interactivity.</p>
+                    </div>
+                </div>
+
+                <!-- Resume PRO -->
+                <div class="project-card fade-in">
+                    <a href="https://krithik-khair.github.io/resumepro/" target="_blank">
+                        <div class="project-image">
+                            <img src="./Black and White Circle Icon Business Logo_20251109_200024_0000.png" alt="ResumePro Project">
+                        </div>
+                    </a>
+                    <div class="project-content">
+                        <h3 class="project-title">ResumePro</h3>
+                        <p class="project-description">An AI-powered resume builder engineered for precision and professional elegance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>All projects designed and developed by Krithik Khair</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timerSection = document.getElementById('timer-section');
+            const portfolioSection = document.getElementById('portfolio-section');
+            const countdownElement = document.getElementById('countdown');
+            const circle = document.querySelector('.progress-ring-circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference;
+            
+            let timeLeft = 10;
+            
+            function setProgress(percent) {
+                const offset = circumference - (percent / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+            }
+            
+            const countdown = setInterval(function() {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                setProgress((10 - timeLeft) * 10);
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerSection.style.display = 'none';
+                    portfolioSection.style.display = 'block';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
